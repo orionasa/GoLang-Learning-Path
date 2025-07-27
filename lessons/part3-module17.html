@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3, Module 17: Profiling and Optimization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 3, Module 17: Profiling and Optimization</h1>
+
+        <div class="card">
+            <div class="card-header">Profiling Go applications with `pprof` to find bottlenecks</div>
+            <div class="card-body">
+                <p>Go has a built-in profiling tool called <code>pprof</code> that can help you identify performance bottlenecks in your code.</p>
+                <p>You can import the <code>net/http/pprof</code> package to expose profiling data over HTTP.</p>
+                <pre><code class="language-go">import _ "net/http/pprof"
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Understanding Database Connection Pooling</div>
+            <div class="card-body">
+                <p>A connection pool is a cache of database connections that can be reused. It can significantly improve the performance of your application by reducing the overhead of opening and closing database connections.</p>
+                <p>The <code>database/sql</code> package automatically handles connection pooling.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Applying optimizations based on profiling data</div>
+            <div class="card-body">
+                <p>Once you have identified performance bottlenecks using <code>pprof</code>, you can apply various optimization techniques to improve your code's performance.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Enable `pprof` in your application.</li>
+                    <li>Use the `go tool pprof` command to analyze the profiling data.</li>
+                    <li>Identify a performance bottleneck in your code and optimize it.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

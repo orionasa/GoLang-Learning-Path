@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2, Module 7: File System I/O</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 2, Module 7: File System I/O</h1>
+
+        <div class="card">
+            <div class="card-header">Reading files using the `os` and `io` packages</div>
+            <div class="card-body">
+                <p>The <code>os</code> package provides functions for interacting with the operating system, including file I/O.</p>
+                <pre><code class="language-go">dat, err := os.ReadFile("/tmp/dat")
+check(err)
+fmt.Print(string(dat))
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Writing data to files</div>
+            <div class="card-body">
+                <p>You can write data to a file using the <code>os.WriteFile</code> function.</p>
+                <pre><code class="language-go">d1 := []byte("hello\ngo\n")
+err := os.WriteFile("/tmp/dat1", d1, 0644)
+check(err)
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Buffering I/O for performance with `bufio`</div>
+            <div class="card-body">
+                <p>The <code>bufio</code> package implements buffered I/O. It's useful for improving performance when working with large files.</p>
+                <pre><code class="language-go">f, err := os.Create("/tmp/dat2")
+check(err)
+defer f.Close()
+
+w := bufio.NewWriter(f)
+n4, err := w.WriteString("buffered\n")
+check(err)
+fmt.Printf("wrote %d bytes\n", n4)
+w.Flush()
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Navigating the file system</div>
+            <div class="card-body">
+                <p>The <code>os</code> package also provides functions for navigating the file system, such as reading directories.</p>
+                <pre><code class="language-go">files, err := os.ReadDir(".")
+if err != nil {
+    log.Fatal(err)
+}
+
+for _, file := range files {
+    fmt.Println(file.Name())
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Write a program that reads a file and prints its contents to the console.</li>
+                    <li>Write a program that creates a new file and writes some text to it.</li>
+                    <li>Write a program that lists all the files in the current directory.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3, Module 12: Middleware and Databases</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 3, Module 12: Middleware and Databases</h1>
+
+        <div class="card">
+            <div class="card-header">Using Middleware in Fiber (Logging, Recovery, CORS)</div>
+            <div class="card-body">
+                <p>Middleware are functions that execute before your route handlers. They are useful for tasks like logging, authentication, and error handling.</p>
+                <p>Fiber comes with a set of built-in middleware.</p>
+                <pre><code class="language-go">package main
+
+import (
+    "log"
+    "github.com/gofiber/fiber/v2"
+    "github.com/gofiber/fiber/v2/middleware/logger"
+    "github.com/gofiber/fiber/v2/middleware/recover"
+)
+
+func main() {
+    app := fiber.New()
+
+    app.Use(logger.New())
+    app.Use(recover.New())
+
+    // ... your routes
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Introduction to the `database/sql` package</div>
+            <div class="card-body">
+                <p>The <code>database/sql</code> package provides a generic SQL interface. You use it with a database driver to connect to a specific database.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Setting up PostgreSQL (or MySQL) and connecting from Go</div>
+            <div class="card-body">
+                <p>To connect to a database, you need a database driver. For PostgreSQL, you can use <code>pq</code> or <code>pgx</code>.</p>
+                <pre><code class="language-bash">go get github.com/lib/pq
+</code></pre>
+                <pre><code class="language-go">import (
+    "database/sql"
+    _ "github.com/lib/pq"
+)
+
+func main() {
+    connStr := "user=pqgotest dbname=pqgotest sslmode=verify-full"
+    db, err := sql.Open("postgres", connStr)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer db.Close()
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Add logging and recovery middleware to your Fiber application.</li>
+                    <li>Install a PostgreSQL driver and write a program to connect to a PostgreSQL database.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

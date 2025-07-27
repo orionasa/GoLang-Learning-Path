@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2, Module 6: Advanced Concurrency Patterns</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 2, Module 6: Advanced Concurrency Patterns</h1>
+
+        <div class="card">
+            <div class="card-header">The `select` Statement for managing multiple channels</div>
+            <div class="card-body">
+                <p>The <code>select</code> statement lets a goroutine wait on multiple communication operations. A <code>select</code> blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready.</p>
+                <pre><code class="language-go">func fibonacci(c, quit chan int) {
+    x, y := 0, 1
+    for {
+        select {
+        case c <- x:
+            x, y = y, x+y
+        case <-quit:
+            fmt.Println("quit")
+            return
+        }
+    }
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">The `sync` Package: `WaitGroup` for managing groups of Goroutines</div>
+            <div class="card-body">
+                <p>A <code>WaitGroup</code> waits for a collection of goroutines to finish. The main goroutine calls <code>Add</code> to set the number of goroutines to wait for. Then, each of the goroutines runs and calls <code>Done</code> when finished. At the same time, <code>Wait</code> can be used to block until all goroutines have finished.</p>
+                <pre><code class="language-go">var wg sync.WaitGroup
+for i := 0; i < 5; i++ {
+    wg.Add(1)
+    go func(i int) {
+        defer wg.Done()
+        fmt.Println(i)
+    }(i)
+}
+wg.Wait()
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">The `sync` Package: `Mutex` for protecting shared data</div>
+            <div class="card-body">
+                <p>A <code>Mutex</code> is a mutual exclusion lock. It can be used to protect shared data from being accessed by multiple goroutines at the same time.</p>
+                <pre><code class="language-go">var mu sync.Mutex
+mu.Lock()
+// critical section
+mu.Unlock()
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Write a program that uses a <code>select</code> statement to receive from two different channels.</li>
+                    <li>Write a program that uses a <code>WaitGroup</code> to wait for multiple goroutines to finish.</li>
+                    <li>Write a program that uses a <code>Mutex</code> to protect a shared variable that is incremented by multiple goroutines.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

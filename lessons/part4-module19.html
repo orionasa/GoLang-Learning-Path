@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 4, Module 19: Capstone Project: Planning & Architecture</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 4, Module 19: Capstone Project: Planning & Architecture</h1>
+
+        <div class="card">
+            <div class="card-header">Defining game features (player login, matchmaking, actions)</div>
+            <div class="card-body">
+                <p>Before you start coding, it's important to plan the features of your game. This includes:</p>
+                <ul>
+                    <li>Player authentication (login/registration)</li>
+                    <li>A matchmaking system to connect players</li>
+                    <li>Real-time game actions (e.g., moving a character, casting a spell)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Designing the database schema for users and game state</div>
+            <div class="card-body">
+                <p>You'll need to design a database schema to store user data and game state. This might include tables for:</p>
+                <ul>
+                    <li><code>users</code> (id, username, password_hash)</li>
+                    <li><code>games</code> (id, status, created_at)</li>
+                    <li><code>game_players</code> (game_id, user_id, score)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Designing the WebSocket message formats for real-time events</div>
+            <div class="card-body">
+                <p>You need to define the structure of the messages that will be sent over the WebSocket connection. A common approach is to use a JSON object with a <code>type</code> field to indicate the type of message.</p>
+                <pre><code class="language-json">{
+  "type": "player_move",
+  "payload": {
+    "x": 10,
+    "y": 20
+  }
+}
+</code></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Create a document outlining the features of your game.</li>
+                    <li>Design the database schema for your game.</li>
+                    <li>Define the WebSocket message formats for your game.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

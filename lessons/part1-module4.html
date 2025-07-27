@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1, Module 4: Structs, Methods & Interfaces</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 1, Module 4: Structs, Methods & Interfaces</h1>
+
+        <div class="card">
+            <div class="card-header">Composite Types: Structs and Pointers</div>
+            <div class="card-body">
+                <p>A <strong>struct</strong> is a collection of fields. It's useful for grouping data together to form records.</p>
+                <pre><code class="language-go">type Vertex struct {
+    X int
+    Y int
+}
+
+func main() {
+    v := Vertex{1, 2}
+    fmt.Println(v.X)
+}
+</code><button class="copy-btn">Copy</button></pre>
+                <p>A <strong>pointer</strong> holds the memory address of a value. The <code>&</code> operator generates a pointer to its operand.</p>
+                <pre><code class="language-go">p := &v
+p.X = 1e9
+fmt.Println(v)
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Defining Methods on Structs</div>
+            <div class="card-body">
+                <p>Go does not have classes. However, you can define methods on types. A method is a function with a special <em>receiver</em> argument.</p>
+                <pre><code class="language-go">type Vertex struct {
+    X, Y float64
+}
+
+func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    v := Vertex{3, 4}
+    fmt.Println(v.Abs())
+}
+</code><button class="copy-btn">Copy</button></pre>
+                <p>You can declare methods with pointer receivers to modify the value to which the receiver points.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Interfaces: Defining and Implementing Behavior</div>
+            <div class="card-body">
+                <p>An <strong>interface</strong> type is defined as a set of method signatures. A value of interface type can hold any value that implements those methods.</p>
+                <pre><code class="language-go">type Abser interface {
+    Abs() float64
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">The Empty Interface (`interface{}`) and Type Assertions</div>
+            <div class="card-body">
+                <p>The interface type that specifies zero methods is known as the <strong>empty interface</strong>. An empty interface may hold values of any type.</p>
+                <pre><code class="language-go">var i interface{}
+i = 42
+i = "hello"
+</code><button class="copy-btn">Copy</button></pre>
+                <p>A <strong>type assertion</strong> provides access to an interface value's underlying concrete value.</p>
+                <pre><code class="language-go">s := i.(string)
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Go's philosophy: Composition over Inheritance</div>
+            <div class="card-body">
+                <p>Go does not support inheritance. Instead, it encourages composition through embedding structs and interfaces.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Create a <code>Person</code> struct with fields for name and age.</li>
+                    <li>Define a method on the <code>Person</code> struct that prints a greeting.</li>
+                    <li>Create an interface called <code>Shaper</code> with a method <code>Area() float64</code>.</li>
+                    <li>Create two structs, <code>Rectangle</code> and <code>Circle</code>, that implement the <code>Shaper</code> interface.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

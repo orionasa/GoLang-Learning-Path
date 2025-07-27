@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1, Module 1: Introduction & Setup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 1, Module 1: Introduction & Setup</h1>
+
+        <div class="card">
+            <div class="card-header">Why Go?</div>
+            <div class="card-body">
+                <p>Go, also known as Golang, is a statically typed, compiled programming language designed at Google. It is known for its simplicity, efficiency, and strong support for concurrent programming.</p>
+                <ul>
+                    <li><strong>Concurrency:</strong> Go's goroutines and channels make it easy to write highly concurrent and parallel programs.</li>
+                    <li><strong>Performance:</strong> Go is a compiled language that compiles down to machine code, resulting in excellent performance.</li>
+                    <li><strong>Simplicity:</strong> The language has a small and simple syntax, making it easy to learn and read.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Installing and Configuring the Go Toolchain</div>
+            <div class="card-body">
+                <p>Before you can start writing Go code, you need to install the Go toolchain.</p>
+                <ol>
+                    <li>Download the installer for your operating system from the official <a href="https://golang.org/dl/" target="_blank">Go website</a>.</li>
+                    <li>Follow the installation instructions for your OS.</li>
+                    <li>Verify the installation by opening a terminal and running:
+                        <pre><code class="language-bash">go version</code></pre>
+                    </li>
+                    <li><strong>GOPATH and GOMODULES:</strong> Go uses a workspace to manage source code files. By default, your workspace is located at <code>$HOME/go</code>. Go 1.11 introduced modules, which is the standard way to manage dependencies. Ensure you have <code>GO111MODULE=on</code> in your environment variables.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Your First Program: "Hello, World!"</div>
+            <div class="card-body">
+                <p>Let's write a simple "Hello, World!" program in Go.</p>
+                <pre><code class="language-go">package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Using the Go CLI</div>
+            <div class="card-body">
+                <p>The Go command-line interface is a powerful tool for working with Go code.</p>
+                <ul>
+                    <li><code>go run &lt;filename.go&gt;</code>: Compiles and runs the specified Go file.</li>
+                    <li><code>go build &lt;filename.go&gt;</code>: Compiles the Go file and creates an executable file.</li>
+                    <li><code>go fmt &lt;filename.go&gt;</code>: Formats the Go code according to Go's style guidelines.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Recommended IDEs and Setup</div>
+            <div class="card-body">
+                <p>While you can use any text editor to write Go code, using an IDE with Go support can significantly improve your productivity.</p>
+                <ul>
+                    <li><strong>Visual Studio Code:</strong> A popular choice with an excellent Go extension that provides features like IntelliSense, code navigation, and debugging.</li>
+                    <li><strong>GoLand:</strong> A full-featured IDE for Go development from JetBrains.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Install the Go toolchain on your computer.</li>
+                    <li>Write and run the "Hello, World!" program.</li>
+                    <li>Experiment with the <code>go run</code>, <code>go build</code>, and <code>go fmt</code> commands.</li>
+                    <li>Set up your preferred IDE for Go development.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

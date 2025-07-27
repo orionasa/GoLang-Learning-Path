@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2, Module 9: Tooling, Dependencies, and Testing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 2, Module 9: Tooling, Dependencies, and Testing</h1>
+
+        <div class="card">
+            <div class="card-header">Go Modules: Managing dependencies (`go.mod`, `go.sum`)</div>
+            <div class="card-body">
+                <p>Go modules are the standard way to manage dependencies in Go. A module is a collection of Go packages that are released together.</p>
+                <ul>
+                    <li><code>go mod init &lt;module-path&gt;</code>: Initializes a new module.</li>
+                    <li><code>go.mod</code>: Defines the module's path and its dependencies.</li>
+                    <li><code>go.sum</code>: Contains the checksums of the module's dependencies.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Writing Unit Tests with the `testing` package</div>
+            <div class="card-body">
+                <p>Go has a built-in testing framework in the <code>testing</code> package. Tests are written in files that end with <code>_test.go</code>.</p>
+                <pre><code class="language-go">func TestAbs(t *testing.T) {
+    got := Abs(-1)
+    if got != 1 {
+        t.Errorf("Abs(-1) = %f; want 1", got)
+    }
+}
+</code><button class="copy-btn">Copy</button></pre>
+                <p>You can run tests using the <code>go test</code> command.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Benchmarking your code for performance analysis</div>
+            <div class="card-body">
+                <p>The <code>testing</code> package also supports benchmarking. Benchmark functions are similar to test functions, but they are run multiple times to measure performance.</p>
+                <pre><code class="language-go">func BenchmarkFib(b *testing.B) {
+    for i := 0; i < b.N; i++ {
+        Fib(10)
+    }
+}
+</code><button class="copy-btn">Copy</button></pre>
+                <p>You can run benchmarks using the <code>go test -bench=.</code> command.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Create a new Go module.</li>
+                    <li>Write a unit test for a function in your module.</li>
+                    <li>Write a benchmark for a function in your module.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

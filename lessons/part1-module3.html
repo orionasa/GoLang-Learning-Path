@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1, Module 3: Collections and Functions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 1, Module 3: Collections and Functions</h1>
+
+        <div class="card">
+            <div class="card-header">Arrays, Slices, and their relationship</div>
+            <div class="card-body">
+                <p><strong>Arrays</strong> have a fixed size and a specific type.</p>
+                <pre><code class="language-go">var a [2]string
+a[0] = "Hello"
+a[1] = "World"
+</code><button class="copy-btn">Copy</button></pre>
+                <p><strong>Slices</strong> are a more flexible, powerful interface to arrays. They are dynamically-sized and are more common in Go.</p>
+                <pre><code class="language-go">primes := []int{2, 3, 5, 7, 11, 13}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Maps for key-value storage</div>
+            <div class="card-body">
+                <p>Maps are Go's built-in associative data type (sometimes called hash maps or dicts in other languages).</p>
+                <pre><code class="language-go">m := make(map[string]int)
+m["k1"] = 7
+m["k2"] = 13
+fmt.Println("map:", m)
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Defining and Calling Functions</div>
+            <div class="card-body">
+                <p>Functions are central in Go. They can be defined with the <code>func</code> keyword.</p>
+                <pre><code class="language-go">func add(a int, b int) int {
+    return a + b
+}
+
+func main() {
+    res := add(42, 13)
+    fmt.Println("42 + 13 =", res)
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Multiple Return Values and Variadic Functions</div>
+            <div class="card-body">
+                <p>Go functions can return multiple values. This is often used for returning a result and an error value.</p>
+                <pre><code class="language-go">func vals() (int, int) {
+    return 3, 7
+}
+
+func main() {
+    a, b := vals()
+    fmt.Println(a)
+    fmt.Println(b)
+}
+</code><button class="copy-btn">Copy</button></pre>
+                <p><strong>Variadic functions</strong> can be called with any number of trailing arguments.</p>
+                <pre><code class="language-go">func sum(nums ...int) {
+    fmt.Print(nums, " ")
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    fmt.Println(total)
+}
+
+func main() {
+    sum(1, 2)
+    sum(1, 2, 3)
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">The `error` type for basic error handling</div>
+            <div class="card-body">
+                <p>Go uses an explicit, value-based error handling mechanism. Functions that can fail return an <code>error</code> as their last return value.</p>
+                <pre><code class="language-go">func Sqrt(x float64) (float64, error) {
+	if x < 0 {
+		return 0, errors.New("cannot Sqrt negative number")
+	}
+	return math.Sqrt(x), nil
+}
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Write a function that takes a slice of integers and returns the sum of all the elements.</li>
+                    <li>Write a function that takes a map of strings to integers and returns the sum of all the values.</li>
+                    <li>Write a function that returns both a result and an error. Call it and handle the error.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

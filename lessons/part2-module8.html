@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2, Module 8: Data Processing and Serialization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .container {
+            margin-top: 2rem;
+        }
+        .card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: #333;
+            color: #00aaff;
+            font-weight: bold;
+        }
+        .card-body, .list-group-item {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+        pre[class*="language-"] {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Part 2, Module 8: Data Processing and Serialization</h1>
+
+        <div class="card">
+            <div class="card-header">Working with JSON: Encoding and Decoding</div>
+            <div class="card-body">
+                <p>Go provides built-in support for JSON encoding and decoding, including to and from built-in and custom data types.</p>
+                <h5>Encoding (Marshalling)</h5>
+                <pre><code class="language-go">type Response1 struct {
+    Page   int
+    Fruits []string
+}
+res1D := &Response1{
+    Page:   1,
+    Fruits: []string{"apple", "peach", "pear"}}
+res1B, _ := json.Marshal(res1D)
+fmt.Println(string(res1B))
+</code><button class="copy-btn">Copy</button></pre>
+                <h5>Decoding (Unmarshalling)</h5>
+                <pre><code class="language-go">str := `{"page": 1, "fruits": ["apple", "peach"]}`
+res := Response2{}
+json.Unmarshal([]byte(str), &res)
+fmt.Println(res.Fruits[0])
+</code><button class="copy-btn">Copy</button></pre>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Processing other common formats like CSV and XML</div>
+            <div class="card-body">
+                <p>Go's standard library also includes packages for working with other common data formats like CSV and XML.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Handling data streams and transformations</div>
+            <div class="card-body">
+                <p>The <code>io</code> package provides the <code>io.Reader</code> and <code>io.Writer</code> interfaces, which are used throughout the standard library to represent data streams.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Assignment</div>
+            <div class="card-body">
+                <p>Your assignment for this module is to:</p>
+                <ol>
+                    <li>Write a program that marshals a Go struct to JSON.</li>
+                    <li>Write a program that unmarshals a JSON string into a Go struct.</li>
+                    <li>Explore the <code>encoding/csv</code> package and write a program to read a CSV file.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
