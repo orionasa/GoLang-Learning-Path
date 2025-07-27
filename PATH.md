@@ -59,6 +59,7 @@ This restructured path divides complex topics into dedicated modules to provide 
     * [ ] Writing data to files
     * [ ] Buffering I/O for performance with `bufio`
     * [ ] Navigating the file system
+    * [ ] File operation performance tunning for Large data files, chunking etc.
 
 * **Module 8: Data Processing and Serialization**
     * [ ] Working with JSON: Encoding and Decoding
@@ -74,7 +75,7 @@ This restructured path divides complex topics into dedicated modules to provide 
     * [ ] The `net/http` Client: Making HTTP Requests (GET, POST)
     * [ ] Consuming REST APIs from external services
     * [ ] Handling HTTP client timeouts and errors
-    * [ ] Introduction to low-level TCP with the `net` package
+    * [ ] Introduction to low-level TCP with the `net` package and server & client example
 
 ***
 
